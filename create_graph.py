@@ -3,20 +3,36 @@
 import networkx as nx
 import random
 import sys
+import time
+import names
 
 num_node = int(sys.argv[1])
-#fg = open('graph.pg', "w")
-fn = open('node.csv', "w")
-fe = open('edge.csv', "w")
+fc = open('customer.csv', "w")
+fn = open('account.csv', "w")
+fe = open('transaction.csv', "w")
 
-Graph = nx.gnp_random_graph(num_node, 0.1, directed=False)
+Graph = nx.gnp_random_graph(num_node, 0.1, seed=0, directed=False)
 print('Avg num of destination nodes:', Graph.number_of_edges() * 2 / Graph.number_of_nodes())
 
-labels = ['House', 'School', 'Restaurant', 'Cafe', 'Hospital', 'Station', 'Supermarket']
 for node in range(num_node):
-    label = labels[node % len(labels)]
-    #fg.write(str(id_node) + '\t:' + label + '\n')
-    fn.write(str(node) + ',' + label + '\n')
+    fn.write(','.join([
+        str(node), # Account ID
+        str(node % (int(num_node * 0.8))) # Customer ID
+        ]) + '\n')
+
+for node in range(int(num_node * 0.8)):
+    fc.write(','.join([
+        str(node), # Account ID
+        names.get_first_name(),
+        names.get_last_name()
+        ]) + '\n')
+
+def random_date(proportion):
+    format = '%Y-%m-%d %H:%M:%S'
+    stime = time.mktime(time.strptime("2020-11-10 9:00:00", format))
+    etime = time.mktime(time.strptime("2020-11-20 9:00:00", format))
+    ptime = stime + proportion * (etime - stime)
+    return time.strftime(format, time.localtime(ptime))
 
 for node in range(num_node):
     neighbors = list(Graph.neighbors(node))
@@ -25,6 +41,12 @@ for node in range(num_node):
     for edge in range(num_edge):
         node_src = node
         random.seed(edge)
-        node = random.choice(neighbors)
-        #fg.write('\t'.join([str(node_old), '->', str(node), ':transfer_to', 'txn_id:' + str(id_node) + '_' + str(id_edge)]) + '\n')
-        fe.write(','.join([str(node_src), str(node), 'transfer_to', str(node_src) + '_' + str(edge)]) + '\n')
+        node_dst = random.choice(neighbors)
+        fe.write(','.join([
+            str(node_src),
+            str(node_dst),
+            'transfer_to',
+            str(node_src) + '_' + str(edge), # txn_id
+            random_date(random.random()),
+            str(random.randrange(100, 1000, step=100)) # amount
+            ]) + '\n')
