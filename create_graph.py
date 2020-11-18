@@ -14,15 +14,17 @@ fe = open('transaction.csv', "w")
 Graph = nx.gnp_random_graph(num_node, 0.1, seed=0, directed=False)
 print('Avg num of destination nodes:', Graph.number_of_edges() * 2 / Graph.number_of_nodes())
 
+# Account
 for node in range(num_node):
     fn.write(','.join([
-        str(node), # Account ID
+        str(node), # ID
         str(node % (int(num_node * 0.8))) # Customer ID
         ]) + '\n')
 
+# Customer
 for node in range(int(num_node * 0.8)):
     fc.write(','.join([
-        str(node), # Account ID
+        str(node), # ID
         names.get_first_name(),
         names.get_last_name()
         ]) + '\n')
@@ -34,6 +36,7 @@ def random_date(proportion):
     ptime = stime + proportion * (etime - stime)
     return time.strftime(format, time.localtime(ptime))
 
+# Transaction
 for node in range(num_node):
     neighbors = list(Graph.neighbors(node))
     random.seed(node)
@@ -45,8 +48,7 @@ for node in range(num_node):
         fe.write(','.join([
             str(node_src),
             str(node_dst),
-            'transfer_to',
-            str(node_src) + '_' + str(edge), # txn_id
-            random_date(random.random()),
+            str(node_src * 100 + edge), # txn_id
+            random_date(random.random()), # txn_time
             str(random.randrange(100, 1000, step=100)) # amount
             ]) + '\n')
