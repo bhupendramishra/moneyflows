@@ -1,0 +1,21 @@
+CREATE PROPERTY GRAPH moneyflows
+  VERTEX TABLES (
+    moneyflows.customer
+      LABEL customer
+      PROPERTIES (cst_id, first_name, last_name)
+  , moneyflows.account
+      LABEL account
+      PROPERTIES (acc_id)
+  )
+  EDGE TABLES (
+    moneyflows.transaction
+      KEY (txn_id)
+      SOURCE KEY(acc_id_src) REFERENCES account
+      DESTINATION KEY(acc_id_dst) REFERENCES account
+      LABEL transferred_to
+  , moneyflows.account
+      KEY (acc_id)
+      SOURCE KEY(cst_id) REFERENCES customer
+      DESTINATION KEY(acc_id) REFERENCES account
+      LABEL owns
+  )
