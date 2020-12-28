@@ -1,9 +1,11 @@
-CREATE PROPERTY GRAPH moneyflows
+CREATE PROPERTY GRAPH "Moneyflows"
   VERTEX TABLES (
     moneyflows.customer
+      KEY (cst_id)
       LABEL customer
       PROPERTIES (cst_id, first_name, last_name)
   , moneyflows.account
+      KEY (acc_id)
       LABEL account
       PROPERTIES (acc_id)
   )
