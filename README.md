@@ -1,5 +1,10 @@
 # Moneyflows
 
+- [Create dataset](#create-dataset)
+- [Load dataset to tables](#load-dataset-to-tables)
+- [Create property graph](#create-property-graph)
+- [Run PGQL queries](#run-pgql-queries)
+
 ## Create dataset
 
 Run the python script to create graph with the number of accounts.
@@ -79,7 +84,7 @@ To make this graph accessable from other sessions, publish the graph.
 
     >>> graph.publish()
 
-## Run queries
+## Run PGQL queries
 
 If the graph is already published, other sessions can view it using Graph Visualization app.
 
@@ -89,6 +94,11 @@ If the graph is not published, get the session ID to login with the same session
 
     >>> session
     PgxSession(id: 54935993-1d06-41a6-bf8e-efeab1aaf144, name: python_pgx_client)
+
+- [Simple entity relationships](#simple-entity-relationships)
+- [Cyclic transfers](#cyclic-transfers)
+- [Path finding](#path-finding)
+- [Aggregation and sort](#aggregation-and-sort)
 
 ### Simple entity relationships
 
