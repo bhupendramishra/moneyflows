@@ -7,15 +7,28 @@
 
 ## Create dataset
 
-Run the python script to create graph with the number of accounts.
+Sample dataset is under `/data/scale-100/` directory.
 
-    $ cd data/
+    $ ls /data/scale-100/*.csv
+    account.csv customer.csv transaction.csv
+
+Copy the 3 CSV files under `/data/` for loading.
+
+    $ cp /data/scale-100/*.csv /data/
+
+For creating a graph with larger number of accounts (e.g. 10000), run this script.
+
+    $ cd script/
     $ python3 create_graph.py 10000
 
 This script creates 3 CSV files.
 
     $ ls *.csv
     account.csv customer.csv transaction.csv
+
+Locate the CSV files under `/data/` directory.
+
+    $ mv *.csv ../data/
 
 ## Load dataset to tables
 

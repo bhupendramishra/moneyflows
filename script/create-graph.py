@@ -13,7 +13,7 @@ fa.write('acc_id,cst_id\n')
 fc.write('cst_id,first_name,last_name\n')
 ft.write('acc_id_src,acc_id_dst,txn_id,datetime,amount\n')
 
-graph = nx.gnp_random_graph(num_node, 0.002, seed=0, directed=False)
+graph = nx.gnp_random_graph(num_node, 20 / num_node, seed=0, directed=False)
 print('Avg degree:', graph.number_of_edges() * 2 / graph.number_of_nodes())
 
 # Account
