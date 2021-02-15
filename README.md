@@ -1,11 +1,39 @@
 # Moneyflows
 
-- [Create dataset](#create-dataset)
+- [Environment](#environment)
+- [Prepare dataset](#prepare-dataset)
 - [Load dataset to tables](#load-dataset-to-tables)
 - [Create property graph](#create-property-graph)
 - [Run PGQL queries](#run-pgql-queries)
 
-## Create dataset
+## Environment
+
+- [Oracle Cloud](https://github.com/rexzj266/oracle-pgx-on-dbcs-quickstart/blob/master/marketplace/pdx-deploy-from-marketplace.md)
+- [Docker](https://github.com/ryotayamanaka/oracle-pg/blob/20.4/README.md)
+
+## Download the scripts
+
+### Oracle Cloud
+
+Login to the DBCS instance and clone this repository at the home directory of `oracle` user.
+
+    $ sudo su - oracle
+    $ cd ~
+    $ git clone https://github.com/ryotayamanaka/moneyflows.git
+
+Login to the Graph Server instance and clone this repository at the home directory of `opc` user.
+
+    $ cd ~
+    $ git clone https://github.com/ryotayamanaka/moneyflows.git
+
+### Docker
+
+Go to `graphs/` directory and clone this repository.
+
+    $ cd oracle-pg/graphs/
+    $ git clone https://github.com/ryotayamanaka/moneyflows.git
+
+## Prepare dataset
 
 Sample dataset is under `/data/scale-100/` directory.
 
@@ -15,6 +43,8 @@ Sample dataset is under `/data/scale-100/` directory.
 Copy the 3 CSV files under `/data/` for loading.
 
     $ cp /data/scale-100/*.csv /data/
+
+### Create larger dataset (optional)
 
 For creating a graph with larger number of accounts (e.g. 10000), run this script.
 
@@ -31,6 +61,32 @@ Locate the CSV files under `/data/` directory.
     $ mv *.csv ../data/
 
 ## Load dataset to tables
+
+### Oracle Cloud
+
+Move to `script/` directory.
+
+    $ cd ~/moneyflows/script/
+
+Create a database user.
+
+    $ sqlplus sys/Welcome1@<pdb-service-name> as sysdba @create-user.sql
+
+Create tables.
+
+    $ sqlplus moneyflows/WELcome11##@<pdb-service-name> @create-table.sql
+
+Load the data from the CSV file.
+
+    $ sqlldr moneyflows/WELcome11##@<pdb-service-name> sqlldr_acc.ctl direct=true
+    $ sqlldr moneyflows/WELcome11##@<pdb-service-name> sqlldr_cst.ctl direct=true
+    $ sqlldr moneyflows/WELcome11##@<pdb-service-name> sqlldr_txn.ctl direct=true
+
+Exit from the database container.
+
+    $ exit
+
+### Docker
 
 Run a bash console on `database` container as user "54321" (= "oracle" user in the container, for writing the sqlldr files).
 
@@ -62,6 +118,10 @@ Exit from the database container.
 
 Then start a client shell instance that connects to the server
 
+    # Oracle Cloud (Graph Server)
+    $ opgpy --base_url http://graph-server:7007 --user moneyflows
+    
+    # Docker
     $ docker-compose exec graph-client opgpy --base_url http://graph-server:7007 --user moneyflows
     
     enter password for user hackmakers (press Enter for no password): WELcome11##
