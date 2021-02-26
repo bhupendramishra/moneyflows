@@ -153,7 +153,28 @@ If you need to recreate the graph, destroy the graph first and run the statement
 
     >>> graph.destroy()
 
-To make this graph accessable from other sessions, publish the graph.
+## Publish the graph
+
+To make this graph accessable from other sessions, you need to publish the graph.
+
+Open the conf file and add the permission for publilshing graphs to the role.
+
+    $ vi /etc/oracle/graph/pgx.conf
+
+`pgx.conf`
+
+    "pgx_role": "GRAPH_DEVELOPER",
+    "pgx_permissions": [
+      { "grant": "PGX_SESSION_CREATE" },
+      { "grant": "PGX_SESSION_NEW_GRAPH" },
+      { "grant": "PGX_SESSION_GET_PUBLISHED_GRAPH" },
+      { "grant": "PGX_SESSION_ADD_PUBLISHED_GRAPH" },    <--
+
+Restart the Graph Server.
+
+    $ sudo systemctl restart pgx
+
+Login to the Python shell, create the graph again, then publish it. 
 
     >>> graph.publish()
 
