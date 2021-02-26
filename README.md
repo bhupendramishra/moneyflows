@@ -15,13 +15,13 @@
 
 ### Oracle Cloud
 
-Login to the DBCS instance and clone this repository at the home directory of `oracle` user.
+Login to the **DBCS** instance and clone this repository at the home directory of `oracle` user.
 
     $ sudo su - oracle
     $ cd ~
     $ git clone https://github.com/ryotayamanaka/moneyflows.git
 
-Login to the Graph Server instance and clone this repository at the home directory of `opc` user.
+Login to the **Graph Server** instance and clone this repository at the home directory of `opc` user.
 
     $ cd ~
     $ git clone https://github.com/ryotayamanaka/moneyflows.git
@@ -35,6 +35,8 @@ Go to `graphs/` directory and clone this repository.
 
 ## Prepare dataset
 
+### Pre-created dataset
+
 Sample dataset is under `/data/scale-100/` directory.
 
     $ ls /data/scale-100/*.csv
@@ -44,7 +46,7 @@ Copy the 3 CSV files under `/data/` for loading.
 
     $ cp /data/scale-100/*.csv /data/
 
-### Create larger dataset (optional)
+### Larger dataset (optional)
 
 For creating a graph with larger number of accounts (e.g. 10000), run this script.
 
@@ -178,16 +180,21 @@ Login to the Python shell, create the graph again, then publish it.
 
     >>> graph.publish()
 
-## Run PGQL queries
+## Visualize Graph
 
 If the graph is already published, other sessions can view it using Graph Visualization app.
 
-- http://localhost:7007/ui/
+- Oracle Cloud: https://<ip_address>:7007/ui/
+- Docker: http://localhost:7007/ui/
 
 If the graph is not published, get the session ID to login with the same session and view the graph.
 
     >>> session
     PgxSession(id: 54935993-1d06-41a6-bf8e-efeab1aaf144, name: python_pgx_client)
+
+Unzip [highlighs.json.zip](./highlighs.json.zip) and upload onto Graph Visualization UI.
+
+## Run PGQL queries
 
 - [Simple entity relationships](#simple-entity-relationships)
 - [Cyclic transfers](#cyclic-transfers)
