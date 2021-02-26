@@ -1,12 +1,16 @@
 # Moneyflows
 
-- [Environment](#environment)
+- [Setup environment](#setup-environment)
 - [Prepare dataset](#prepare-dataset)
 - [Load dataset to tables](#load-dataset-to-tables)
 - [Create property graph](#create-property-graph)
+- [Publish graph](#publish-graph)
+- [Visualize graph](#visualize-graph)
 - [Run PGQL queries](#run-pgql-queries)
 
-## Environment
+## Setup environment
+
+Please follow the documentations below.
 
 - [Oracle Cloud](https://github.com/rexzj266/oracle-pgx-on-dbcs-quickstart/blob/master/marketplace/pdx-deploy-from-marketplace.md)
 - [Docker](https://github.com/ryotayamanaka/oracle-pg/blob/20.4/README.md)
@@ -155,7 +159,7 @@ If you need to recreate the graph, destroy the graph first and run the statement
 
     >>> graph.destroy()
 
-## Publish the graph
+## Publish graph
 
 To make this graph accessable from other sessions, you need to publish the graph.
 
@@ -180,7 +184,7 @@ Login to the Python shell, create the graph again, then publish it.
 
     >>> graph.publish()
 
-## Visualize Graph
+## Visualize graph
 
 If the graph is already published, other sessions can view it using Graph Visualization app.
 
