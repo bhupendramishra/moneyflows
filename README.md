@@ -1,6 +1,7 @@
 # Moneyflows
 
 - [Setup environment](#setup-environment)
+- [Download the scripts](#download-the-scripts)
 - [Prepare dataset](#prepare-dataset)
 - [Load dataset to tables](#load-dataset-to-tables)
 - [Create property graph](#create-property-graph)
