@@ -197,7 +197,7 @@ If the graph is not published, get the session ID to login with the same session
     >>> session
     PgxSession(id: 54935993-1d06-41a6-bf8e-efeab1aaf144, name: python_pgx_client)
 
-Unzip [highlighs.json.zip](./highlighs.json.zip) and upload onto Graph Visualization UI.
+Unzip [highlights.json.zip](./highlights.json.zip) and upload onto Graph Visualization UI.
 
 ## Run PGQL queries
 
