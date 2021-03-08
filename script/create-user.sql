@@ -1,11 +1,17 @@
 DROP USER moneyflows;
 
 CREATE USER moneyflows
-IDENTIFIED BY WELcome11##
+IDENTIFIED BY WELcome123##
 DEFAULT TABLESPACE users
 TEMPORARY TABLESPACE temp
 QUOTA UNLIMITED ON users;
 
-GRANT connect, resource, graph_developer TO moneyflows;
+GRANT
+  create session
+, create table
+, create view
+, graph_developer
+, pgx_session_add_published_graph
+TO moneyflows;
 
 EXIT
