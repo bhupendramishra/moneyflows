@@ -19,7 +19,7 @@ CREATE TABLE transaction (
   acc_id_src NUMBER
 , acc_id_dst NUMBER
 , txn_id NUMBER
-, datetime VARCHAR2(255)
+, datetime TIMESTAMP
 , amount NUMBER
 , CONSTRAINT transaction_pk PRIMARY KEY (txn_id)
 );

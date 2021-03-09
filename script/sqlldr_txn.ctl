@@ -9,6 +9,6 @@ OPTIONALLY ENCLOSED BY '"'
   acc_id_src
 , acc_id_dst
 , txn_id
-, datetime
+, datetime TIMESTAMP "YYYY-MM-DD HH24:MI:SS"
 , amount
 )
