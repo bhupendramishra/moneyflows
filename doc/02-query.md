@@ -109,6 +109,7 @@ SELECT ARRAY_AGG(a.acc_id) AS list_of_accounts
      , ARRAY_AGG(t.amount) AS list_of_amounts
 FROM MATCH TOP 100 SHORTEST ((a1) (-[t:transferred_to]->(a))* (a1))
 WHERE a1.acc_id = 10
+  AND COUNT(a) = COUNT(DISTINCT a)
 ```
 
 Show the cycle, giving a list of transfers
@@ -124,6 +125,7 @@ SELECT ARRAY_AGG(a.acc_id) AS list_of_accounts
      , ARRAY_AGG(t.amount) AS list_of_amounts
 FROM MATCH TOP 100 SHORTEST ((a1) (-[t:transferred_to]->(a) WHERE t.amount > 500)* (a1))
 WHERE a1.acc_id = 10
+  AND COUNT(a) = COUNT(DISTINCT a)
 ```
 
 ```sql
